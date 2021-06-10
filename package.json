@@ -3,14 +3,8 @@
   "version": "0.0.2",
   "scripts": {
     "ng": "ng",
-    "start app": "ng serve app",
     "start app-with-lib": "ng serve app-with-lib --port 4500 -o",
-    "build": "ng build cb-cqrs",
     "build cb-cqrs": "ng build cb-cqrs",
-    "build cb-cqrs --prod": "ng build cb-cqrs --prod && npm pack cb-cqrs --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
