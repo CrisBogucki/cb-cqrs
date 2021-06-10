@@ -2,11 +2,11 @@
 The CRQS library as TypeScript for angular framework
 
 ## Installation
-Using npm:
-```clickhouse
-$ npm i -g cb-cqrs
-$ npm i cb-cqrs --save
-```
+- Using npm
+  ```clickhouse
+    $ npm i -g cb-cqrs
+    $ npm i cb-cqrs --save
+  ```
 
 ## How to Use
 - Add module *CbCqrsModule* in your main module
@@ -25,28 +25,34 @@ $ npm i cb-cqrs --save
   ```
 
 - Register containers for handlers
-  ```angular2html
+  ```typescript
   export class AppModule {
     constructor(cIoC: CommandContainer, qIoC: QueryContainer, eIoC:EventContainer) {
     }
   }
   ```
   
-  sample container IoC
+- Sample containers IoC
   ```typescript
-  import {Injectable} from "@angular/core";
-  import {SampleCommandHandler} from "../Commands/SampleCommandHandler";
-  
   @Injectable({providedIn: 'root'})
   export class CommandContainer {
     constructor(sampleCommandHandler:SampleCommandHandler) {}
   }
+
+  @Injectable({providedIn: 'root'})
+  export class QueryContainer {
+    constructor(sampleQueryHandler:SampleQueryHandler) {}
+  }
+
+  @Injectable({providedIn: 'root'})
+  export class EventContainer {
+    constructor(sampleEventHandler_WhenOnStart:SampleEventHandler_WhenOnStart, sampleEventHandler_WhenOnPause:SampleEventHandler_WhenOnPause) {}
+  }
   ```
 
-### First CommandHandler
-- Create Command of ICommand
+## First CommandHandler
+- Create SampleCommand of ICommand
   ```typescript
-  import {ICommand} from "cb-cqrs";
   export class SampleCommand implements ICommand{
     body: string;
     constructor(body: string) {
@@ -55,36 +61,125 @@ $ npm i cb-cqrs --save
   }
   ``` 
 
-- Create CommandHandler of IHandleCommand<>
-  ```typescript
-  import {Injectable} from "@angular/core";
-  import {BaseContainerIoC, IHandleCommand} from "cb-cqrs";
-  import {SampleCommand} from "./SampleCommand";
-  
+- Create SampleCommandHandler of IHandleCommand<SampleCommand>
+  ```typescript  
   @Injectable({providedIn: 'root'})
   export class SampleCommandHandler implements IHandleCommand<SampleCommand> {
-  
     constructor(private ioc: BaseContainerIoC) {
         ioc.registerCommand(this);
     }
-  
     Handle(command: SampleCommand) {
         console.log('===> Message from SampleCommandHandler', command.body);
     }
   }
   ```
 
-
-- Handle Handler in sample Componnet
+- Handle SampleCommand
   ```typescript
   constructor(private commandBus: CommandBus) {}
  
   ngOnInit(): void {
-      this.commandBus.SendCommand(new SampleCommand("hellow world"))
+      this.commandBus.SendCommand(new SampleCommand("Helow world"))
   }
   
-  ``` 
-  
+  // console result  
+  // ===> Message from SampleCommandHandler Helow world
+  ```
 
+## First QueryHandler
+- Create SampleQuery of IQuery
+  ```typescript
+  export class SampleQuery implements IQuery{
+    body: string;
+    constructor(body: string) {
+        this.body = body}
+  }
+  ``` 
+
+- Create SampleResponse of IResponse
+  ```typescript
+  export class SampleResponse implements IResponse{
+    body: string;
+    constructor(body: string) {
+    this.body = body
+    }
+  }
+  ``` 
+
+- Create SampleQueryHandler of IHandleQuery<SampleQuery, SampleResponse>
+  ```typescript
+  @Injectable({providedIn: 'root'})
+  export class SampleQueryHandler implements IHandleQuery<SampleQuery, SampleResponse> {
+    constructor(private ioc: BaseContainerIoC) {
+        ioc.registerQuery(this);
+    }
+    Handle(query: SampleQuery): SampleResponse {
+      let result = new SampleResponse('===> Message from SampleQueryHandler ' + query.body);
+      return result;
+    }
+  }
+  ```
+
+- Handle SampleQuery
+  ```typescript
+  constructor(private queryBus: QueryBus) {}
+ 
+  ngOnInit(): void {
+    const log = this.queryBus.Query<SampleResponse>(new SampleQuery("Helow World"))
+    console.log(log.body)
+  }
+  
+  // console result 
+  // ===> Message from SampleQueryHandler Helow World
+  ```
+
+## First EventHandler
+- Create SampleEvent of IEvent
+  ```typescript
+  export class SampleEvent implements IEvent {
+    body: string;
+    constructor(body: string) {
+      this.body = body
+    }
+  }
+  ``` 
+
+- Create SampleEventHandler_WhenOnStart of IHandleEvent<SampleEvent>
+  ```typescript  
+  @Injectable({providedIn: 'root'})
+  export class SampleEventHandler_WhenOnStart implements IHandleEvent<SampleEvent> {
+    constructor(private ioc: BaseContainerIoC) {
+      ioc.registerEvent(this);
+    }
+    Handle(event: SampleEvent) {
+      console.log('===> Message from SampleEventHandler_WhenOnStart ' + event.body);
+    }
+  }
+  ```
+
+- Create SampleEventHandler_WhenOnPause of IHandleEvent<SampleEvent>
+  ```typescript  
+  @Injectable({providedIn: 'root'})
+  export class SampleEventHandler_WhenOnPause implements IHandleEvent<SampleEvent> {
+    constructor(private ioc: BaseContainerIoC) {
+      ioc.registerEvent(this);
+    }
+    Handle(event: SampleEvent) {
+      console.log('===> Message from SampleEventHandler_WhenOnPause ' + event.body);
+    }
+  }
+  ```
+
+- Handle SampleEvent
+  ```typescript
+  constructor(private eventBus: EventBus) {}
+  ngOnInit(): void {
+    this.eventBus.SendEvent(new SampleEvent("Helow World"))
+  }
+  
+  // console result  
+  // ===> Message from SampleEventHandler_WhenOnStart Helow World
+  // ===> Message from SampleEventHandler_WhenOnPause Helow World
+  ```
 
 
