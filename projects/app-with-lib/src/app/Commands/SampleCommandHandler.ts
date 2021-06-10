@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
-import {IHandleCommand} from "cb-cqrs/lib/cqrs/Command/IHandleCommand";
+import {BaseContainerIoC, IHandleCommand} from "cb-cqrs";
 import {SampleCommand} from "./SampleCommand";
-import {BaseContainerIoC} from "cb-cqrs/lib/cqrs/base.container";
 
 @Injectable({providedIn: 'root'})
 export class SampleCommandHandler implements IHandleCommand<SampleCommand> {
@@ -11,7 +10,6 @@ export class SampleCommandHandler implements IHandleCommand<SampleCommand> {
   }
 
   Handle(command: SampleCommand) {
-    const msg = command.body;
-    console.log('===> Wiadomosc z SampleCommandHandler', msg, command);
+    console.log('===> Message from SampleCommandHandler', command.body);
   }
 }

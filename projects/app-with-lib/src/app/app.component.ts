@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CommandBus} from "cb-cqrs";
 import {SampleCommand} from "./Commands/SampleCommand";
-import {CommandBus} from "cb-cqrs/lib/cqrs/Command/Code/CommandBus";
 
 @Component({
   selector: 'app-root',
@@ -12,11 +12,8 @@ export class AppComponent implements OnInit{
   constructor(private commandBus: CommandBus) {
   }
 
-  // constructor(private commandBus: CommandBus, private queryBus: QueryBus, private eventBus: EventBus) {
-  // }
-
   ngOnInit(): void {
-    //this.commandBus.SendCommand(new SampleCommand("ala ma kota"))
+    this.commandBus.SendCommand(new SampleCommand("ala ma kota"))
     // let log = this.queryBus.Query<SampleResponse>(new SampleQuery("ala ma kota"));
     // console.log('<=== Wiadomosc z SampleQueryHandler ', log);
     //

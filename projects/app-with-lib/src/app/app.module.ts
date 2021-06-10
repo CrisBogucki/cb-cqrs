@@ -3,7 +3,10 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {CbCqrsModule} from "cb-cqrs";
+import {BaseContainerIoC, CbCqrsModule, CommandBus, EventBus, QueryBus} from "cb-cqrs";
+import {CommandContainer} from "./Containers/CommandContainer";
+import {QueryContainer} from "./Containers/QueryContainer";
+import {EventContainer} from "./Containers/EventContainer";
 
 @NgModule({
   declarations: [
@@ -14,8 +17,10 @@ import {CbCqrsModule} from "cb-cqrs";
     AppRoutingModule,
     CbCqrsModule
   ],
-  providers: [],
+  providers: [BaseContainerIoC, CommandBus, QueryBus, EventBus],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(cIoC: CommandContainer, qIoC: QueryContainer, eIoC:EventContainer) {
+  }
 }

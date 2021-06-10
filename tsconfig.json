@@ -14,15 +14,8 @@
       "cb-cqrs": [
         "dist/cb-cqrs"
       ],
-      "cqrs": [
-        "dist/cqrs/cqrs",
-        "dist/cqrs"
-      ],
-      "ng-cqrs-lib": [
-        "dist/ng-cqrs-lib/ng-cqrs-lib",
-        "dist/ng-cqrs-lib",
-        "dist/ng-cqrs-lib/ng-cqrs-lib",
-        "dist/ng-cqrs-lib"
+      "cb-cqrs/*": [
+        "dist/cb-cqrs/*"
       ]
     },
     "target": "es2015",
