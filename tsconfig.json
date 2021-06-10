@@ -12,8 +12,11 @@
     "importHelpers": true,
     "paths": {
       "cb-cqrs": [
-        "dist/cb-cqrs/cb-cqrs",
         "dist/cb-cqrs"
+      ],
+      "cqrs": [
+        "dist/cqrs/cqrs",
+        "dist/cqrs"
       ],
       "ng-cqrs-lib": [
         "dist/ng-cqrs-lib/ng-cqrs-lib",

@@ -1,12 +1,11 @@
 import {Injectable, QueryList} from "@angular/core";
-import {IQueryBus} from "../IQueryBus";
 import {IHandleQuery} from "../IHandleQuery";
 import {IQuery} from "../IQuery";
 import {IResponse} from "../IResponse";
 import {BaseContainerIoC} from "../../base.container";
 
-@Injectable({providedIn: 'root'})
-export class QueryBus implements IQueryBus {
+@Injectable()
+export class QueryBus {
 
   private handlersFactory: QueryList<IHandleQuery<IQuery,IResponse>>;
 

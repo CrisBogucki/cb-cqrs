@@ -1,11 +1,10 @@
 import {Injectable, QueryList} from "@angular/core";
-import {IEventBus} from "../IEventBus";
 import {IHandleEvent} from "../IHandleEvent";
 import {IEvent} from "../IEvent";
 import {BaseContainerIoC} from "../../base.container";
 
-@Injectable({providedIn: 'root'})
-export class EventBus implements IEventBus {
+@Injectable()
+export class EventBus {
 
   private handlersFactory: QueryList<IHandleEvent<IEvent>>;
 

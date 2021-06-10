@@ -7,8 +7,7 @@ import {IQuery} from "./Query/IQuery";
 import {IEvent} from "./Event/IEvent";
 import {IResponse} from "./Query/IResponse";
 
-
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class BaseContainerIoC {
 
   handlersCommandFactory: QueryList<IHandleCommand<ICommand>>;
@@ -23,7 +22,7 @@ export class BaseContainerIoC {
 
 
   registerCommand(handler: IHandleCommand<ICommand>) {
-      this.handlersCommandFactory.reset([...this.handlersCommandFactory.toArray(), handler]);
+    this.handlersCommandFactory.reset([...this.handlersCommandFactory.toArray(), handler]);
   }
 
   registerQuery(handler: IHandleQuery<IQuery, IResponse>) {

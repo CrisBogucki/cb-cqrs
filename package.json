@@ -1,13 +1,15 @@
 {
-  "name": "ng-cqrs",
-  "version": "0.0.1",
+  "name": "main-cb-cqrs",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve cb-cqrs",
+    "start app": "ng serve app",
+    "start app-with-lib": "ng serve app-with-lib --port 4500 -o",
     "build": "ng build cb-cqrs",
-    "build--prod": "ng build cb-cqrs --prod",
+    "build cb-cqrs --prod": "ng build cb-cqrs --prod && npm pack cb-cqrs --prod",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +21,7 @@
     "@angular/platform-browser": "~11.2.12",
     "@angular/platform-browser-dynamic": "~11.2.12",
     "@angular/router": "~11.2.12",
+    "cb-cqrs": "file:cb-cqrs-0.0.10.tgz",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
