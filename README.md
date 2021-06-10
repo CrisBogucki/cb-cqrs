@@ -19,11 +19,6 @@ The CRQS library as TypeScript for angular framework
     ]
   ```
 
-- Register providers
-  ```angular2html
-  providers: [BaseContainerIoC, CommandBus, QueryBus, EventBus],
-  ```
-
 - Register containers for handlers
   ```typescript
   export class AppModule {
