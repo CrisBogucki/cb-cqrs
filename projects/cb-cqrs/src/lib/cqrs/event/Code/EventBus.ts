@@ -12,7 +12,7 @@ export class EventBus {
     this.handlersFactory = ioc.handlersEventFactory;
   }
 
-  SendEvent<T>(T: IEvent) {
+  SendEvent(T: IEvent) {
       this.handlersFactory.forEach(x=> {
         if(typeof x == typeof T) {
           x.Handle(T);

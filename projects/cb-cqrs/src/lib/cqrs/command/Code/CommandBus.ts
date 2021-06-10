@@ -12,8 +12,7 @@ export class CommandBus  {
     this.handlersFactory = ioc.handlersCommandFactory;
   }
 
-  SendCommand<T>(T: ICommand) {
-    console.log('idzie');
+  SendCommand(T: ICommand) {
     this.handlersFactory.forEach(x=> {
       if(typeof x == typeof T) {
         x.Handle(T);

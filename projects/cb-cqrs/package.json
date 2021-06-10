@@ -1,10 +1,11 @@
 {
   "name": "cb-cqrs",
-  "version": "1.0.1",
+  "version": "1.1.2",
   "repository": {
     "url": "https://github.com/CrisBogucki/cb-cqrs"
   },
   "description": "base CQRS lib at Angular",
+  "keywords": ["command", "query", "event", "responsibility segregation", "cqrs", "angular","typescript"],
   "peerDependencies": {
     "@angular/common": "^11.2.14",
     "@angular/core": "^11.2.14"

@@ -3,8 +3,8 @@
   "version": "0.0.2",
   "scripts": {
     "ng": "ng",
-    "start app-with-lib": "ng serve app-with-lib --port 4500 -o",
-    "build cb-cqrs": "ng build cb-cqrs",
+    "start app": "ng serve app-with-lib --port 4500 -o",
+    "build lib": "ng build cb-cqrs"
   },
   "private": true,
   "dependencies": {
