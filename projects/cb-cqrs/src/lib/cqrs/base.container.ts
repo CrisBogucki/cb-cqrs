@@ -7,7 +7,7 @@ import {IQuery} from "./Query/IQuery";
 import {IEvent} from "./Event/IEvent";
 import {IResponse} from "./Query/IResponse";
 
-@Injectable()
+@Injectable({providedIn: "root"})
 export class BaseContainerIoC {
 
   handlersCommandFactory: QueryList<IHandleCommand<ICommand>>;

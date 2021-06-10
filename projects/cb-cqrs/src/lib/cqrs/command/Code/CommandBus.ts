@@ -3,7 +3,7 @@ import {IHandleCommand} from '../IHandleCommand';
 import {ICommand} from '../ICommand';
 import {BaseContainerIoC} from "../../base.container";
 
-@Injectable()
+@Injectable({providedIn: "root"})
 export class CommandBus  {
 
   private handlersFactory: QueryList<IHandleCommand<ICommand>>;

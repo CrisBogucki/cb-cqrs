@@ -1,9 +1,9 @@
 {
-  "name": "main-cb-cqrs",
+  "name": "cb-cqrs",
   "version": "0.0.2",
   "scripts": {
     "ng": "ng",
-    "start app": "ng serve app-with-lib --port 4500 -o",
+    "start app": "ng serve -o",
     "build lib": "ng build cb-cqrs"
   },
   "private": true,
@@ -16,7 +16,6 @@
     "@angular/platform-browser": "~11.2.12",
     "@angular/platform-browser-dynamic": "~11.2.12",
     "@angular/router": "~11.2.12",
-    "cb-cqrs": "^0.0.12",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

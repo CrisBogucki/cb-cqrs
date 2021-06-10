@@ -164,5 +164,5 @@
       }
     }
   },
-  "defaultProject": "cb-cqrs"
+  "defaultProject": "app"
 }

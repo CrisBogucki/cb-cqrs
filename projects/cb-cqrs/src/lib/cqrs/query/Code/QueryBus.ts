@@ -4,7 +4,7 @@ import {IQuery} from "../IQuery";
 import {IResponse} from "../IResponse";
 import {BaseContainerIoC} from "../../base.container";
 
-@Injectable()
+@Injectable({providedIn: "root"})
 export class QueryBus {
 
   private handlersFactory: QueryList<IHandleQuery<IQuery,IResponse>>;
