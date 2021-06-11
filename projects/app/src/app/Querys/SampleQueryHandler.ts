@@ -11,8 +11,8 @@ export class SampleQueryHandler implements IHandleQuery<SampleQuery, SampleRespo
     ioc.registerQuery(this);
   }
 
-  Handle(query: SampleQuery): SampleResponse {
-    let result = new SampleResponse(query.body + " wynik operacji");
+  handle(query: SampleQuery): SampleResponse {
+    let result = new SampleResponse('===> Message from SampleQueryHandler ' + query.body);
     return result;
   }
 

@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CommandBus} from "../../../cb-cqrs/src/lib/cqrs/command/Code/CommandBus";
-import {QueryBus} from "../../../cb-cqrs/src/lib/cqrs/query/Code/QueryBus";
-import {EventBus} from "../../../cb-cqrs/src/lib/cqrs/event/Code/EventBus";
 import {SampleCommand} from "./Commands/SampleCommand";
 import {SampleResponse} from "./Querys/SampleResponse";
 import {SampleQuery} from "./Querys/SampleQuery";
 import {SampleEvent} from "./Events/SampleEvent";
+import {ServiceBus} from "../../../cb-cqrs/src/lib/cqrs/ServiceBus";
 
 @Component({
   selector: 'app-root',
@@ -14,14 +12,13 @@ import {SampleEvent} from "./Events/SampleEvent";
 export class AppComponent implements OnInit {
   title = 'CQRS TEST APP';
 
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus, private eventBus: EventBus) {
-  }
+  constructor(private serviceBus: ServiceBus) {}
 
   ngOnInit(): void {
-    this.commandBus.SendCommand(new SampleCommand("ala ma kota"))
-    let log = this.queryBus.Query<SampleResponse>(new SampleQuery("ala ma kota"));
-    console.log('<=== Wiadomosc z SampleQueryHandler ', log);
+    this.serviceBus.sendCommand(new SampleCommand("Helow world"))
+    let log = this.serviceBus.query<SampleResponse>(new SampleQuery("Helow World"));
+    console.log(log?.body)
 
-    this.eventBus.SendEvent(new SampleEvent("Lecimy"));
+    this.serviceBus.sendEvent(new SampleEvent("Helow World"))
   }
 }

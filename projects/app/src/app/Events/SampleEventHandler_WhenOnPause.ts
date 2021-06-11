@@ -11,7 +11,7 @@ export class SampleEventHandler_WhenOnPause implements IHandleEvent<SampleEvent>
     ioc.registerEvent(this);
   }
 
-  Handle(event: SampleEvent) {
-    console.log('===> Leci event z ' + (typeof this).toString());
+  handle(event: SampleEvent) {
+    console.log('===> Message from SampleEventHandler_WhenOnPause ' + event.body);
   }
 }

@@ -11,7 +11,7 @@ export class SampleEventHandler_WhenOnStart implements IHandleEvent<SampleEvent>
     ioc.registerEvent(this);
   }
 
-  Handle(event: SampleEvent) {
-    console.log('===> Leci event z asd sad ' + (typeof this).toString());
+  handle(event: SampleEvent) {
+    console.log('===> Message from SampleEventHandler_WhenOnStart ' + event.body);
   }
 }

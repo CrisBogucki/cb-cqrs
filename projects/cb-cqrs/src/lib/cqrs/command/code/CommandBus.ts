@@ -3,6 +3,9 @@ import {IHandleCommand} from '../IHandleCommand';
 import {ICommand} from '../ICommand';
 import {BaseContainerIoC} from "../../base.container";
 
+/*
+* Better to use a ServiceBus aggregate
+* */
 @Injectable({providedIn: "root"})
 export class CommandBus  {
 
@@ -12,10 +15,10 @@ export class CommandBus  {
     this.handlersFactory = ioc.handlersCommandFactory;
   }
 
-  SendCommand(T: ICommand) {
+  sendCommand(command: ICommand) {
     this.handlersFactory.forEach(x=> {
-      if(typeof x == typeof T) {
-        x.Handle(T);
+      if(typeof x == typeof command) {
+        x.handle(command);
       }
     });
   }

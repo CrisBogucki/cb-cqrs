@@ -1,3 +1,3 @@
 export interface IHandleEvent<T> {
-  Handle(event:T);
+  handle(event:T);
 }

@@ -71,10 +71,10 @@ The CRQS library as TypeScript for angular framework
 
 - Handle SampleCommand
   ```typescript
-  constructor(private commandBus: CommandBus) {}
+  constructor(private serviceBus: ServiceBus) {}
  
   ngOnInit(): void {
-      this.commandBus.SendCommand(new SampleCommand("Helow world"))
+      this.serviceBus.sendCommand(new SampleCommand("Helow world"))
   }
   
   // console result  
@@ -117,10 +117,10 @@ The CRQS library as TypeScript for angular framework
 
 - Handle SampleQuery
   ```typescript
-  constructor(private queryBus: QueryBus) {}
+  constructor(private serviceBus: ServiceBus) {}
  
   ngOnInit(): void {
-    const log = this.queryBus.Query<SampleResponse>(new SampleQuery("Helow World"))
+    let log = this.serviceBus.query<SampleResponse>(new SampleQuery("Helow World"))
     console.log(log.body)
   }
   
@@ -167,9 +167,9 @@ The CRQS library as TypeScript for angular framework
 
 - Handle SampleEvent
   ```typescript
-  constructor(private eventBus: EventBus) {}
+  constructor(private serviceBus: ServiceBus) {}
   ngOnInit(): void {
-    this.eventBus.SendEvent(new SampleEvent("Helow World"))
+    this.serviceBus.sendEvent(new SampleEvent("Helow World"))
   }
   
   // console result  

@@ -10,8 +10,7 @@ export class SampleCommandHandler implements IHandleCommand<SampleCommand> {
     ioc.registerCommand(this);
   }
 
-  Handle(command: SampleCommand) {
-    const msg = command.body;
-    console.log('===> Wiadomosc z SampleCommandHandler', msg, command);
+  handle(command: SampleCommand) {
+    console.log('===> Message from SampleCommandHandler', command.body);
   }
 }

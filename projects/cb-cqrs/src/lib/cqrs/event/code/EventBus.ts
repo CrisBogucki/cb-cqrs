@@ -3,6 +3,9 @@ import {IHandleEvent} from "../IHandleEvent";
 import {IEvent} from "../IEvent";
 import {BaseContainerIoC} from "../../base.container";
 
+/*
+* Better to use a ServiceBus aggregate
+* */
 @Injectable({providedIn: "root"})
 export class EventBus {
 
@@ -12,10 +15,10 @@ export class EventBus {
     this.handlersFactory = ioc.handlersEventFactory;
   }
 
-  SendEvent(T: IEvent) {
+  sendEvent(event: IEvent) {
       this.handlersFactory.forEach(x=> {
-        if(typeof x == typeof T) {
-          x.Handle(T);
+        if(typeof x == typeof event) {
+          x.handle(event);
         }
       });
   }

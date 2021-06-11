@@ -4,6 +4,9 @@ import {IQuery} from "../IQuery";
 import {IResponse} from "../IResponse";
 import {BaseContainerIoC} from "../../base.container";
 
+/*
+* Better to use a ServiceBus aggregate
+* */
 @Injectable({providedIn: "root"})
 export class QueryBus {
 
@@ -13,11 +16,11 @@ export class QueryBus {
     this.handlersFactory = ioc.handlersQueryFactory;
   }
 
-  Query<T>(query: IQuery): T {
+  query<T>(query: IQuery): T {
     let result: IResponse;
     this.handlersFactory.forEach(x=> {
       if(typeof x == typeof query) {
-        result = x.Handle(query);
+        result = x.handle(query);
       }
     });
     return result as T;
