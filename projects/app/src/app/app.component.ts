@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.serviceBus.sendCommand(new SampleCommand("Helow world"))
     let log = this.serviceBus.query<SampleResponse>(new SampleQuery("Helow World"));
-    console.log(log?.body)
+    console.log(log.body)
 
     this.serviceBus.sendEvent(new SampleEvent("Helow World"))
   }

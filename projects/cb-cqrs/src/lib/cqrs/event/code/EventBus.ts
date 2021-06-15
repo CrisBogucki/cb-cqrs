@@ -16,11 +16,21 @@ export class EventBus {
   }
 
   sendEvent(event: IEvent) {
+    let check;
+    const handle = event.constructor.name
       this.handlersFactory.forEach(x=> {
-        if(typeof x == typeof event) {
+        const handler = x.constructor.name.toLowerCase().split('handler')[0];
+        if (handler === handle.toLowerCase()) {
           x.handle(event);
+          check = event;
         }
       });
+
+    if (check !== event) {
+      console.error('===> Not found correct handler for ' + handle + '.\n' +
+        'Is correct handler name is: ' + handle + 'Handler');
+    }
+
   }
 
 }
