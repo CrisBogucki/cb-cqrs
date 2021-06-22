@@ -176,7 +176,7 @@
   .terminal {
     position: relative;
     width: 80%;
-    max-width: 600px;
+    max-width: 900px;
     border-radius: 6px;
     padding-top: 45px;
     margin-top: 8px;
@@ -353,56 +353,63 @@
   </div>
 
   <!-- Next Steps -->
-  <h2>CQRS data bus</h2>
+  <h2>CQRS Service Bus</h2>
   <p>What do you want to do next with your app?</p>
 
   <input type="hidden" #selection>
 
   <div class="card-container">
-    <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
+    <div class="card card-small" (click)="selection.value = 'command'" tabindex="0">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-      <span>New Component</span>
+      <span>Send Command</span>
     </div>
 
-    <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+    <div class="card card-small" (click)="selection.value = 'query'" tabindex="0">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-      <span>Angular Material</span>
+      <span>Query</span>
     </div>
 
-    <div class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
+    <div class="card card-small" (click)="selection.value = 'event'" tabindex="0">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-      <span>Add PWA Support</span>
+      <span>Send Event</span>
     </div>
 
-    <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Add Dependency</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Run and Watch Tests</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Build for Production</span>
-    </div>
   </div>
 
+
   <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>this.commandBus.SendCommand(new SampleCommand("ala ma kota"))</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build --prod</pre>
+    <pre *ngSwitchDefault>
+
+      //code
+      this.serviceBus.sendCommand(new SampleCommand("Helow world"))
+
+      //console request
+      //===> Message from SampleCommandHandler Helow world
+
+    </pre>
+
+    <pre *ngSwitchCase="'query'">
+
+      //code
+      let log = this.serviceBus.query&lt;SampleResponse&gt;(new SampleQuery("Helow World"));
+      console.log(log.body)
+
+      //console request
+      //===> Message from SampleQueryHandler Helow World
+
+    </pre>
+    <pre *ngSwitchCase="'event'">
+
+      //code
+      this.serviceBus.sendEvent(new SampleEvent("Helow World"))
+
+      //console result
+      //===> Message from SampleEventHandler_WhenOnStart Helow World
+      //===> Message from SampleEventHandler_WhenOnPause Helow World
+    </pre>
   </div>
 
   <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">

@@ -6,6 +6,9 @@
     "start app": "ng serve -o",
     "build lib": "ng build cb-cqrs"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.12",
