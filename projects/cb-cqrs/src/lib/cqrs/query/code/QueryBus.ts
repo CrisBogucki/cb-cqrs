@@ -19,14 +19,16 @@ export class QueryBus {
   query<T>(query: IQuery): T {
     let result: IResponse;
     const handle = query.constructor.name
-    this.handlersFactory.forEach(x => {
+    const check = this.handlersFactory.find((x)=>{
       const handler = x.constructor.name.toLowerCase().split('handler')[0];
       if (handler === handle.toLowerCase()) {
         result = x.handle(query) as T;
+        return true;
       }
+      return false;
     });
 
-    if (!result) {
+    if (!check) {
       console.error('===> Not found correct handler for ' + handle + '.\n' +
         'Is correct handler name is: ' + handle + 'Handler');
     }

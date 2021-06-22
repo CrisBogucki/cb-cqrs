@@ -2,8 +2,6 @@ import {Injectable, QueryList} from '@angular/core';
 import {IHandleCommand} from '../IHandleCommand';
 import {ICommand} from '../ICommand';
 import {BaseContainerIoC} from "../../base.container";
-import {IQuery} from "../../query/IQuery";
-import {IResponse} from "../../query/IResponse";
 
 /*
 * Better to use a ServiceBus aggregate
@@ -18,17 +16,17 @@ export class CommandBus  {
   }
 
   sendCommand(command: ICommand) {
-    let check;
     const handle = command.constructor.name
-    this.handlersFactory.forEach(x=> {
+    const check = this.handlersFactory.find((x)=>{
       const handler = x.constructor.name.toLowerCase().split('handler')[0];
       if (handler === handle.toLowerCase()) {
         x.handle(command);
-        check = command
+        return true;
       }
+      return false;
     });
 
-    if (check !== command) {
+    if (!check) {
       console.error('===> Not found correct handler for ' + handle + '.\n' +
         'Is correct handler name is: ' + handle + 'Handler');
     }
