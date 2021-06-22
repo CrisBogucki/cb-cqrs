@@ -63,7 +63,7 @@ The CRQS library as TypeScript for angular framework
     constructor(private ioc: BaseContainerIoC) {
         ioc.registerCommand(this);
     }
-    Handle(command: SampleCommand) {
+    handle(command: SampleCommand) {
         console.log('===> Message from SampleCommandHandler', command.body);
     }
   }
@@ -108,7 +108,7 @@ The CRQS library as TypeScript for angular framework
     constructor(private ioc: BaseContainerIoC) {
         ioc.registerQuery(this);
     }
-    Handle(query: SampleQuery): SampleResponse {
+    handle(query: SampleQuery): SampleResponse {
       let result = new SampleResponse('===> Message from SampleQueryHandler ' + query.body);
       return result;
     }
@@ -146,7 +146,7 @@ The CRQS library as TypeScript for angular framework
     constructor(private ioc: BaseContainerIoC) {
       ioc.registerEvent(this);
     }
-    Handle(event: SampleEvent) {
+    handle(event: SampleEvent) {
       console.log('===> Message from SampleEventHandler_WhenOnStart ' + event.body);
     }
   }
@@ -159,7 +159,7 @@ The CRQS library as TypeScript for angular framework
     constructor(private ioc: BaseContainerIoC) {
       ioc.registerEvent(this);
     }
-    Handle(event: SampleEvent) {
+    handle(event: SampleEvent) {
       console.log('===> Message from SampleEventHandler_WhenOnPause ' + event.body);
     }
   }
