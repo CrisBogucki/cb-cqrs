@@ -1,5 +1,5 @@
 # cb-cqrs
-The CRQS library as TypeScript for angular framework
+The CQRS library as TypeScript for angular framework
 
 ## Installation
 - Using npm
