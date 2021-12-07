@@ -13,4 +13,7 @@ export class SampleCommandHandler implements IHandleCommand<SampleCommand> {
   handle(command: SampleCommand) {
     console.log('===> Message from SampleCommandHandler', command.body);
   }
+
+  type: SampleCommand;
+
 }

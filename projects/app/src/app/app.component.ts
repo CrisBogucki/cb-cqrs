@@ -4,6 +4,7 @@ import {SampleResponse} from "./Querys/SampleResponse";
 import {SampleQuery} from "./Querys/SampleQuery";
 import {SampleEvent} from "./Events/SampleEvent";
 import {ServiceBus} from "../../../cb-cqrs/src/lib/cqrs/ServiceBus";
+import {AddItemCommand} from "./Commands/AddItemCommand";
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,13 @@ export class AppComponent implements OnInit {
 
   constructor(private serviceBus: ServiceBus) {}
 
-  ngOnInit(): void {
-    this.serviceBus.sendCommand(new SampleCommand("Helow world"))
-    let log = this.serviceBus.query<SampleResponse>(new SampleQuery("Helow World"));
+  async ngOnInit(): Promise<void> {
+
+    this.serviceBus.sendCommand(new SampleCommand("Helow world"));
+    this.serviceBus.sendCommand(new AddItemCommand("My Item"));
+
+
+    let log = await this.serviceBus.query<SampleResponse>(new SampleQuery("Helow World"));
     console.log(log.body)
 
     this.serviceBus.sendEvent(new SampleEvent("Helow World"))
