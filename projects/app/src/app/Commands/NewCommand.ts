@@ -1,6 +1,6 @@
 import {ICommand} from "../../../../cb-cqrs/src/lib/cqrs/command";
 
-export class AddItemCommand implements ICommand{
+export class NewCommand implements ICommand{
 
   name: string;
 

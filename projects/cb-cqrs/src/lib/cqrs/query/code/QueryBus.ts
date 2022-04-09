@@ -4,9 +4,7 @@ import {IQuery} from "../IQuery";
 import {IResponse} from "../IResponse";
 import {BaseContainerIoC} from "../../base.container";
 
-/*
-* Better to use a ServiceBus aggregate
-* */
+
 @Injectable({providedIn: "root"})
 export class QueryBus {
 
@@ -16,24 +14,29 @@ export class QueryBus {
     this.handlersFactory = ioc.handlersQueryFactory;
   }
 
-  query<T>(query: IQuery): T {
-    let result: IResponse;
-    const handle = query.constructor.name
-    const check = this.handlersFactory.find((x)=>{
-      const handler = x.constructor.name.toLowerCase().split('handler')[0];
-      if (handler === handle.toLowerCase()) {
-        result = x.handle(query) as T;
-        return true;
+  async query<T>(query: IQuery): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+
+      let result: IResponse;
+
+      const handle = query.constructor.name
+      const check = this.handlersFactory.find((x) => {
+        const handler = x.constructor.name.toLowerCase().split('handler')[0];
+        if (handler === handle.toLowerCase()) {
+          result = x.handle(query) as T;
+          resolve(result as T);
+          return true;
+        }
+        return false;
+      });
+
+      if (!check) {
+        console.error('===> Not found correct handler for ' + handle + '.\n' +
+          'Is correct handler name is: ' + handle + 'Handler');
+        reject();
       }
-      return false;
     });
-
-    if (!check) {
-      console.error('===> Not found correct handler for ' + handle + '.\n' +
-        'Is correct handler name is: ' + handle + 'Handler');
-    }
-
-    return result as T;
   }
 
 }

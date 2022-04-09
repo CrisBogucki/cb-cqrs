@@ -1,9 +1,7 @@
 import {Injectable} from "@angular/core";
-import {SampleEvent} from "./SampleEvent";
-import {IHandleEvent} from "../../../../cb-cqrs/src/lib/cqrs/event/IHandleEvent";
+import {IHandleEvent} from "../../../../cb-cqrs/src/lib/cqrs/event";
 import {BaseContainerIoC} from "../../../../cb-cqrs/src/lib/cqrs/base.container";
 import {AddedItemEvent} from "./AddedItemEvent";
-
 
 
 @Injectable({providedIn: 'root'})
@@ -13,7 +11,17 @@ export class AddedItemEventHandler implements IHandleEvent<AddedItemEvent> {
     ioc.registerEvent(this);
   }
 
-  handle(event: AddedItemEvent) {
-    console.log(`===> Hello world we have a good message -> ${event.message}`);
+  async handle(event: AddedItemEvent) {
+    await this.test(event);
+  }
+
+  async test(event: AddedItemEvent) {
+    return new Promise<void>((resolve) => {
+      const interval = setInterval(() => {
+        console.log('===> Message from AddedItemEvent ' + event.message);
+        clearInterval(interval);
+        resolve();
+      }, 3000);
+    });
   }
 }

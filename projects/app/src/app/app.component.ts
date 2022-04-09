@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {SampleCommand} from "./Commands/SampleCommand";
 import {SampleResponse} from "./Querys/SampleResponse";
 import {SampleQuery} from "./Querys/SampleQuery";
-import {SampleEvent} from "./Events/SampleEvent";
-import {ServiceBus} from "../../../cb-cqrs/src/lib/cqrs/ServiceBus";
+import {ServiceBus} from "../../../cb-cqrs/src/lib/cqrs/service.bus";
 import {AddItemCommand} from "./Commands/AddItemCommand";
+import {Sample1Query} from "./Querys/Sample1Query";
 
 @Component({
   selector: 'app-root',
@@ -17,13 +17,22 @@ export class AppComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    this.serviceBus.sendCommand(new SampleCommand("Helow world"));
-    this.serviceBus.sendCommand(new AddItemCommand("My Item"));
+    console.log('=====> Program Start');
+    //await this.serviceBus.sendCommand(new SampleCommand("TEST OK 1"));
+    //await this.serviceBus.sendCommand(new AddItemCommand("TEST OK 2"));
 
 
-    let log = await this.serviceBus.query<SampleResponse>(new SampleQuery("Helow World"));
+    let log = await this.serviceBus.query<SampleResponse>(new SampleQuery("TEST OK 1"));
     console.log(log.body)
 
-    this.serviceBus.sendEvent(new SampleEvent("Helow World"))
+    let log1 = await this.serviceBus.query<SampleResponse>(new Sample1Query("TEST OK 2"));
+    console.log(log1.body)
+
+
+    //await this.serviceBus.sendEvent(new AddedItemEvent("TEST OK"))
+    //await this.serviceBus.sendEvent(new SampleEvent("TEST OK"))
+
+    console.log('=====> Program End');
+
   }
 }

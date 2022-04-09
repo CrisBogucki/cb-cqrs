@@ -1,4 +1,4 @@
-import {ICommand} from "../../../../cb-cqrs/src/lib/cqrs/command/ICommand";
+import {ICommand} from "../../../../cb-cqrs/src/lib/cqrs/command";
 
 export class SampleCommand implements ICommand{
 

@@ -3,9 +3,6 @@ import {IHandleEvent} from "../IHandleEvent";
 import {IEvent} from "../IEvent";
 import {BaseContainerIoC} from "../../base.container";
 
-/*
-* Better to use a ServiceBus aggregate
-* */
 @Injectable({providedIn: "root"})
 export class EventBus {
 
@@ -15,10 +12,15 @@ export class EventBus {
     this.handlersFactory = ioc.handlersEventFactory;
   }
 
-  sendEvent(event: IEvent) {
-    let check;
+  async sendEvent(event: IEvent) {
+
     const handle = event.constructor.name
-      this.handlersFactory.forEach(x=> {
+
+    return new Promise<void>((resolve) => {
+
+      let check;
+
+      this.handlersFactory.forEach(async x => {
         const handler = x.constructor.name.toLowerCase().split('handler')[0];
         if (handler === handle.toLowerCase()) {
           x.handle(event);
@@ -26,11 +28,14 @@ export class EventBus {
         }
       });
 
-    if (check !== event) {
-      console.error('===> Not found correct handler for ' + handle + '.\n' +
-        'Is correct handler name is: ' + handle + 'Handler');
-    }
 
+      if (check !== event) {
+        console.error('===> Not found correct handler for ' + handle + '.\n' +
+          'Is correct handler name is: ' + handle + 'Handler');
+      }
+
+      resolve();
+
+    })
   }
-
 }

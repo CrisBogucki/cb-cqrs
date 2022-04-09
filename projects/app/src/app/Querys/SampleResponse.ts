@@ -1,4 +1,4 @@
-import {IResponse} from "../../../../cb-cqrs/src/lib/cqrs/query/IResponse";
+import {IResponse} from "../../../../cb-cqrs/src/lib/cqrs/query";
 
 export class SampleResponse implements IResponse{
 

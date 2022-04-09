@@ -1,4 +1,4 @@
-import {IEvent} from "../../../../cb-cqrs/src/lib/cqrs/event/IEvent";
+import {IEvent} from "../../../../cb-cqrs/src/lib/cqrs/event";
 
 export class AddedItemEvent implements IEvent {
 

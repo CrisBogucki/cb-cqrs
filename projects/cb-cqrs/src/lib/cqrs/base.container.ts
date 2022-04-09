@@ -1,11 +1,7 @@
 import {Injectable, QueryList} from "@angular/core";
-import {IHandleCommand} from "./Command/IHandleCommand";
-import {IHandleQuery} from "./Query/IHandleQuery";
-import {IHandleEvent} from "./Event/IHandleEvent";
-import {ICommand} from "./Command/ICommand";
-import {IQuery} from "./Query/IQuery";
-import {IEvent} from "./Event/IEvent";
-import {IResponse} from "./Query/IResponse";
+import {ICommand, IHandleCommand} from "./command";
+import {IEvent, IHandleEvent} from "./event";
+import {IQuery, IResponse, IHandleQuery} from "./query";
 
 @Injectable({providedIn: "root"})
 export class BaseContainerIoC {

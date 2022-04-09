@@ -1,6 +1,6 @@
 import {IQuery} from "../../../../cb-cqrs/src/lib/cqrs/query";
 
-export class SampleQuery implements IQuery{
+export class Sample1Query implements IQuery{
 
   body: string;
 
